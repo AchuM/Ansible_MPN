@@ -18,7 +18,7 @@ once vagrant is installed on Ubuntu operating system, we can verify it by follow
 
 ### How to install on Mac?
 
-
+[In progress..]
 
 
 ### What's inside? 
@@ -28,4 +28,6 @@ once vagrant is installed on Ubuntu operating system, we can verify it by follow
 - [Nginx](https://www.nginx.com/resources/wiki/community/) 
 
 ### Usage 
+
+[In progress....]
 
