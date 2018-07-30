@@ -1,0 +1,61 @@
+- name: Adds ondrej repos
+  apt_repository:
+    repo: "ppa:ondrej/php"
+    update_cache: yes
+- name: Installs php7-fpm
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+  notify:
+    - Restart php7-fpm
+  with_items:
+    - php{{ php7_version }}-fpm
+    - composer
+    - php-apcu
+    - php-pear
+    - php{{ php7_version }}-bz2
+    - php{{ php7_version }}-cli
+    - php{{ php7_version }}-curl
+    - php{{ php7_version }}-gd
+    - php{{ php7_version }}-intl
+    - php{{ php7_version }}-mbstring
+    - php{{ php7_version }}-mcrypt
+    - php{{ php7_version }}-mysql
+    - php{{ php7_version }}-opcache
+    - php{{ php7_version }}-readline
+    - php{{ php7_version }}-xml
+    - php{{ php7_version }}-zip
+    - "[{{ php7_module_debs }}]"
+
+- name: Adds php.ini
+  template:
+    src: "../templates/php.ini.j2"
+    dest: /etc/php/{{ php7_version }}/fpm/php.ini
+    backup: yes
+  notify:
+    - Restart php7-fpm
+
+- name: Checks if nginx is already installed
+  stat:
+    path: /etc/nginx/conf.d/
+  register: __nginx_config_dir
+
+- name: Adds nginx buffer tuning
+  template:
+    src: "../templates/fastcgi_buffers.conf.j2"
+    dest: /etc/nginx/conf.d/fastcgi_buffers.conf
+  when: __nginx_config_dir is defined and __nginx_config_dir.isdir is defined and __nginx_config_dir.isdir
+  notify:
+    - Restart php7-fpm
+    - Restart nginx
+
+- name: Adds pear channels
+  shell: pear channel-discover {{ item }}
+  with_items: pear.channels
+  when: pear is defined
+
+- name: Adds pear packages
+  shell: pear install {{ item }}
+  with_items: pear.packages
+  when: pear is defined
