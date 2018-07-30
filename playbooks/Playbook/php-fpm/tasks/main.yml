@@ -10,7 +10,7 @@
   notify:
     - Restart php7-fpm
   with_items:
-    - php{{ php7_version }}-fpm
+    - php7-fpm
     - composer
     - php-apcu
     - php-pear
@@ -28,34 +28,3 @@
     - php{{ php7_version }}-zip
     - "[{{ php7_module_debs }}]"
 
-- name: Adds php.ini
-  template:
-    src: "../templates/php.ini.j2"
-    dest: /etc/php/{{ php7_version }}/fpm/php.ini
-    backup: yes
-  notify:
-    - Restart php7-fpm
-
-- name: Checks if nginx is already installed
-  stat:
-    path: /etc/nginx/conf.d/
-  register: __nginx_config_dir
-
-- name: Adds nginx buffer tuning
-  template:
-    src: "../templates/fastcgi_buffers.conf.j2"
-    dest: /etc/nginx/conf.d/fastcgi_buffers.conf
-  when: __nginx_config_dir is defined and __nginx_config_dir.isdir is defined and __nginx_config_dir.isdir
-  notify:
-    - Restart php7-fpm
-    - Restart nginx
-
-- name: Adds pear channels
-  shell: pear channel-discover {{ item }}
-  with_items: pear.channels
-  when: pear is defined
-
-- name: Adds pear packages
-  shell: pear install {{ item }}
-  with_items: pear.packages
-  when: pear is defined
