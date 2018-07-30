@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
     ansible.verbose = "vv"
     ansible.playbook = "playbooks/vagrant.yml"
   end
-# Box accessble with
+
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "private_network", ip: "192.168.10.10"
 end
