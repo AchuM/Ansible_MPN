@@ -6,3 +6,13 @@
     - python-mysqldb
     - zip
     - unzip
+- name: Install packages
+    apt: name={{item}}
+    with_items:
+      - python3-pip
+      - python3-mysqldb
+- name: install python mysql bindings
+  apt: name=python-mysqldb state=installed
+- name: Install python MySQL module
+  apt:
+    name: python3-mysqldb
