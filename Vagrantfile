@@ -23,6 +23,6 @@ config.vm.provider "virtualbox" do |vb|
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.verbose = "vv"
-    ansible.playbook = "playbooks/vagrant.yml"
+    ansible.playbook = "roles/vagrant.yml"
 end
 end
