@@ -1,3 +1,0 @@
-- name: mysql users
-  mysql_user: name={{ item.value.user }} password={{ item.value.password }} priv={{ item.value.database }}.*:{{ item.value.privileges }} state=present
-  with_dict: config.mysql
