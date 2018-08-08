@@ -24,8 +24,7 @@ resource "aws_instance" "MPN" {
     ]
   }
 
-
   provisioner "local-exec" {
-    command = "ansible-playbook -i inventory playbooks/vagrant.yml --limit ${self.public_ip} --extra-vars 'ip=${self.public_ip}'}"
+    command = "ansible-playbook -i inventory playbooks.yml --limit ${self.public_ip} --extra-vars 'ip=${self.public_ip}'}"
   }
 }
