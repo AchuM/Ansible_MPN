@@ -1,4 +1,4 @@
-# Vagrant Box with Ansible with MySQL, PHP7-fpm, and Nginx 
+# Vagrant Box with Ansible Playbooks(MySQL, PHP7-fpm, and Nginx) then, AWS provision with Terrafrom  
 This vagrant box is with Ansible and contains MySQl, PHP7-fpm, and Nginx 
 
 ### How to install on Ubuntu? 
