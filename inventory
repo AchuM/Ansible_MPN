@@ -1,2 +1,2 @@
-[localhost]
+[MPN]
 localhost  ansible_connection=local
