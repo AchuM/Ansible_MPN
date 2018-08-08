@@ -56,3 +56,16 @@ After ⏳ you can access it through:
 http://192.168.99.100 
 
 
+## Taking to the next level
+
+### How to provision AWS instance with Terrafrom?
+After you setup the vagrant box you will have a change to take Anislbe playboxs to the cloud by provision with Terrafrom. 
+
+Please follow the following steps:
+
+Login to vagrant box with `vagrant ssh`
+
+Go to vagrant mapped folder `cd /Vagrant`
+
+
+ 
