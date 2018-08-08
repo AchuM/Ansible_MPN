@@ -92,9 +92,9 @@ variable "ssh_key_private" {
 
 ```
 4. Now, follow the normal terraform provision steps 
-- terraform init 
-- terraform plan 
-- terraform apply 
+- `terraform init` 
+- `terraform plan`
+- `terraform apply` 
 
 
  
