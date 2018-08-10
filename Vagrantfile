@@ -11,7 +11,11 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.99.100"
-
+#Installing Terraform
+  mkdir -p /opt/terraform
+  pushd /opt/terraform
+  wget -q https://releases.hashicorp.com/terraform/0.8.8/terraform_0.8.8_linux_amd64.zip
+  unzip -q -o terraform_0.8.8_linux_amd64.zip
 #config.vm.synced_folder ".", "/vagrant", type: "nfs" 
 config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 config.vm.provider "virtualbox" do |vb|
@@ -23,6 +27,6 @@ config.vm.provider "virtualbox" do |vb|
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.verbose = "vv"
-    ansible.playbook = "playbooks/vagrant.yml"
+    ansible.playbook = "roles/vagrant.yml"
 end
 end

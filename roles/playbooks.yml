@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  roles:
+    - main
+    - nginx
+    - mysql
+    - php
+    - php-fpm
